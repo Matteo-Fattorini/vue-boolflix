@@ -7,16 +7,14 @@ const app = new Vue({
   },
   computed: {},
   methods: {
-    getQueryMovies() {
+    getQueryMovies(where) {
       this.movies = [];
       axios
-        .get("https://api.themoviedb.org/3/search/movie", {
+        .get("https://api.themoviedb.org/3" + where, {
           params: { api_key: this.key, query: this.input },
         })
         .then((response) => {
           this.movies = response.data.results;
-          axios.get("https://api.themoviedb.org/3/movie/{movie_id}/images");
-          console.log(response.data.results);
         })
         .catch((err) => {
           console.log("Attenzione" + err);
@@ -26,17 +24,6 @@ const app = new Vue({
   },
 
   mounted() {
-    axios
-      .get("https://api.themoviedb.org/3/movie/top_rated", {
-        params: { api_key: this.key },
-      })
-      .then((response) => {
-        this.movies = response.data.results;
-        axios.get("https://api.themoviedb.org/3/movie/{movie_id}/images");
-        console.log(response.data.results);
-      })
-      .catch((err) => {
-        console.log("Attenzione" + err);
-      });
+    this.getQueryMovies("/movie/top_rated");
   },
 });
