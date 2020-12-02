@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <script defer src="js/main.js"></script>
+    <title>BoolFlix</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- VUE-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+    <!-- AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <main id="main">
+      <header>
+        <div class="container">
+          <div><img src="css/logo.png" alt="logo" /></div>
+          <div class="search">
+            <input
+              @keydown.enter="getQueryMovies"
+              class="input-search"
+              v-model="input"
+              placeholder="cerca un titolo"
+              type="search"
+            />
+            <button @click="getQueryMovies" class="input-btn">Cerca</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="movies-container container">
+        <div :key="movie.id" v-for="movie in movies" class="movie">
+          <div class="title">{{movie.title}}</div>
+          <img
+            :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+            alt="logo-movie"
+          />
+          <span class="author">Metacritic: {{movie.vote_average}}</span>
+          <span class="year">{{movie.release_date}}</span>
+          <span class="language"> Lingua: {{movie.original_language}}</span>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
