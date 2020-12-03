@@ -2,13 +2,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
+    <script src="js/data.js"></script>
     <script defer src="js/main.js"></script>
     <title>BoolFlix</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
     <!-- VUE-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
@@ -19,34 +19,47 @@
   <body>
     <main id="main">
       <header>
-        <div class="container">
-          <div><img src="css/logo.png" alt="logo" /></div>
+        
+        <div class="header-container">
+          <div><img src="css/img/logo.png" alt="logo" /></div>
           <div class="search">
             <input
+              @input = "getQueryMovies('/search/movie')"
               @keydown.enter="getQueryMovies('/search/movie')"
               class="input-search"
               v-model="input"
               placeholder="cerca un titolo"
               type="search"
             />
-            <button @click="getQueryMovies('/search/movie')" class="input-btn">
-              Cerca
-            </button>
           </div>
         </div>
       </header>
-
-      <div class="movies-container container">
+        
+      <div class="movies-container">
+        <div class="prova">{{searchTitle}}</div>
         <div :key="movie.id" v-for="movie in movies" class="movie">
-          <div class="title">{{movie.title}}</div>
-          <img
+          
+          <img class ="poster-img"
             :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-            alt="logo-movie"
+            alt="movie-poster"
           />
-          <span class="author">Metacritic: {{movie.vote_average}}</span>
-          <span class="year">{{movie.release_date}}</span>
-          <span class="language"> Lingua: {{movie.original_language}}</span>
+
+          <div class="details">
+          <div class="title">{{movie.title}}
+            <div v-if="movie.title != movie.original_title" class="original-title"> Original title: {{movie.original_title}}</div>
+            <div class="year">{{movie.release_date}}</div>
+          </div>
+          <div class="description">{{movie.overview}}</div>
+          
+          <div class="language">
+            <img v-on:error ="log" class="flag-img" :src="flagSource(movie.original_language)" alt="logo">
+             {{movie.original_language}}</></div>
+          <div><i v-for ="n in 5" :class="{yellow:  n <= voteTransform(movie.vote_average) }" class="fas fa-star fa-2x grey"></i>
+          </div>
+            
         </div>
+        </div>
+
       </div>
     </main>
   </body>
