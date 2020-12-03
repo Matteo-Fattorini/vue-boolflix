@@ -48,7 +48,49 @@ header .input-search {
   vertical-align: middle;
   background-color: inherit;
   color: white;
+  border-radius: 10px;
 }
+
+header .search, .searchBy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 150px;
+  color: white;
+}
+
+.searchBy {
+  gap: 10px;
+  position: relative;
+}
+
+.searchBy .arrow-down:hover {
+  transform: scale(1.12)
+}
+
+.searchBy .order-by-list {
+  height: 100px;
+  width: 150px;
+  border: 1px solid white;
+  position: absolute;
+  left: 30%;
+  top: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+  border-radius: 20px;
+}
+
+.searchBy .order-by-list ul {
+  list-style-type: none;
+}
+.searchBy .order-by-list ul li:hover{
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+
+
 
 .movies-container {
   display: flex;
@@ -145,7 +187,7 @@ header .input-search {
 }
 
 .searched {
-  margin-top: 100px;
+  margin-top: 150px;
   color: white;
   font-weight: 600;
   text-transform: uppercase;

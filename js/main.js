@@ -1,20 +1,37 @@
 const app = new Vue({
   el: "#main",
   data: {
-    key: "375fb5d5a05f3c4fec8077369df2b91e",
-    input: "",
-    movies: [],
-    tvShows: [],
-    searchTitle: "Top-Rated",
-    flags,
-    hasSearched: false,
-    currentPage: 1,
-    currentWhere: "",
-    maxPage: 1,
+    key: "375fb5d5a05f3c4fec8077369df2b91e", //chiave api
+    input: "", //input v-model su cerca
+    movies: [], //risultati del GET, visualizzati con v-for
+    searchTitle: "Top-Rated", //mostra quello che abbiamo cercato di default Top-Rated
+    flags, //importa le bandiere da data.js
+    hasSearched: false, //ci dice se ha già fatto almeno una ricerca,
+    currentPage: 1, // pagina principale, usata nell'endless scroll, incrementa ogni volta
+    currentWhere: "", //costa stà cercando l'utente, usata per enlsess scroll
+    maxPage: 1, //numero massimo di pagine caricabili nell' endless
+    orderBy: "popularity",
+    orderByMenu: false,
+  },
+
+  computed: {
+    //return a sorted list of movies by popularity
+    sortMovie() {
+      return this.movies.sort(function (a, b) {
+        let value = app.orderBy;
+
+        return a[`${value}`] > b[`${value}`]
+          ? -1
+          : b[`${value}`] > a[`${value}`]
+          ? 1
+          : 0;
+      });
+    },
   },
 
   methods: {
     flagSource(language) {
+      //questa funzione serve ad associare un immagine per ogni bandiera
       if (language) {
         language = language.toUpperCase();
         if (language in this.flags) {
@@ -24,11 +41,12 @@ const app = new Vue({
         }
       }
     },
-
+    // se API ritorna un immagine nulla, mette un immagine stock
     stockImage(e) {
       e.target.src = "css/img/notfound.png";
     },
 
+    // funzione che si occupa dell'endless scroll. Se arriva in fondo alla pagina, carica gli elementi della pagina successiva e li aggiunge a quelli già esistenti
     scroll() {
       window.onscroll = () => {
         let bottomOfWindow =
@@ -44,7 +62,7 @@ const app = new Vue({
                   api_key: this.key,
                   query: this.input,
                   page: this.currentPage,
-                  include_adult: true,
+                  include_adult: false,
                 },
               })
               .then((response) => {
@@ -56,6 +74,7 @@ const app = new Vue({
       };
     },
 
+    //funzione di ricerca sull API. Di default cerca su tutti i canali, la ricerca può essere ristretta dall'utente.
     getQueryMovies(where = "/search/multi", page = 1) {
       this.currentWhere = where;
       this.hasSearched = true;
@@ -72,26 +91,28 @@ const app = new Vue({
             api_key: this.key,
             query: this.input,
             page: page,
-            include_adult: true,
+            include_adult: false,
           },
         })
         .then((response) => {
           this.movies = response.data.results;
           this.maxPage = response.data.total_pages;
-        })
-        .catch((err) => {
-          console.log("Attenzione" + err);
         });
     },
+
+    //transforma il voto in 10 in uno in scala 1-5
     voteTransform(vote) {
-      return Math.round(vote / 2 / 0.5) * 0.5;
+      return Math.round(vote / 2);
     },
   },
 
+  //al mounted di default mette i top rated, e abilita la funzione di endless scroll
   mounted() {
     this.getQueryMovies("/movie/top_rated");
     this.scroll();
   },
+
+  //se l'ultente ha già cercato qualcosa e poi torna indietro lasciando vuoto il campo input ripristina i top-rated
   updated() {
     if (this.input == "" && this.hasSearched == true) {
       this.getQueryMovies("/movie/top_rated");
