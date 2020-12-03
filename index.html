@@ -24,8 +24,8 @@
           <div><img src="css/img/logo.png" alt="logo" /></div>
           <div class="search">
             <input
-              @input = "getQueryMovies('/search/movie')"
-              @keydown.enter="getQueryMovies('/search/movie')"
+              @input = "getQueryMovies()"
+              @keydown.enter="getQueryMovies('/search/multi')"
               class="input-search"
               v-model="input"
               placeholder="cerca un titolo"
@@ -35,12 +35,16 @@
         </div>
       </header>
         
+
+
+      <div class="container">
+      <div class="searched">{{searchTitle}}</div>
       <div class="movies-container">
-        <div class="prova">{{searchTitle}}</div>
         <div :key="movie.id" v-for="movie in movies" class="movie">
           
-          <img class ="poster-img"
+          <img  class ="poster-img"
             :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+            @error="stockImage"
             alt="movie-poster"
           />
 
@@ -52,7 +56,7 @@
           <div class="description">{{movie.overview}}</div>
           
           <div class="language">
-            <img v-on:error ="log" class="flag-img" :src="flagSource(movie.original_language)" alt="logo">
+            <img class="flag-img" :src="flagSource(movie.original_language)" alt="logo">
              {{movie.original_language}}</></div>
           <div><i v-for ="n in 5" :class="{yellow:  n <= voteTransform(movie.vote_average) }" class="fas fa-star fa-2x grey"></i>
           </div>
@@ -60,6 +64,7 @@
         </div>
         </div>
 
+      </div>
       </div>
     </main>
   </body>
