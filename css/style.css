@@ -237,31 +237,37 @@ header .search,
 main {
   transition: transform 0.3s linear;
   position: relative;
+
 }
 
 main.active {
-  transform: rotate(-3deg);
-  transform-origin: bottom left;
+  transform: rotate(10deg);
+  transform-origin: top left;
 }
 
 main.active .hidden-search {
   padding: 0 20px;
   color: white;
-  position: absolute;
-  top: 130px;
-  right: -100px;
+  position: fixed;
+  top: -230px;
+  right: 0;
   height: 300px;
+  width: 300px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  transform: rotate(3deg);
+  transform: rotate(-10deg);
   transform-origin: bottom left;
 }
 
+
 .hidden-search i {
-  margin-bottom: 30px;
+  margin-right: 30px;
+  cursor: pointer;
 }
+
+
 
 @media screen and (max-width: 1200px) {
   .search {
