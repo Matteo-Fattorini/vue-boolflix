@@ -66,10 +66,26 @@
             @error="stockImage"
             alt="movie-poster"
           />
-          <div class = actor-detail v-if="!movie.overview" class="actor"></div>
+
+          <!-- inizio sezione attore -->
+          <div class = actor-details v-if="movie.gender">
+            <div class="title">{{movie.title ? movie.title : movie.name}}
+            </div>
+
+            <div class="year">Mostly known for:</div>
+            <img v-if="movie.known_for[0]"
+            
+            :src="'https://image.tmdb.org/t/p/w500/' + (movie.known_for[0].poster_path)" alt="image-poster"
+            @error="stockImage">
+            
+           <div class="description">{{movie.known_for[0] ? movie.known_for[0].overview : "non disponibile"}}</div>
+          
+          </div>
+
+          <!-- fine sezione attore -->
 
 
-          <div v-if ="movie.overview" class="details">
+          <div v-if ="!movie.gender" class="details">
             <div class="title">{{movie.title ? movie.title : movie.name}}
             <div v-if="movie.title != movie.original_title" class="original-title"> Original title: {{movie.original_title}}</div>
             <div class="year">{{movie.release_date ? movie.relase_date : movie.first_air_date}}</div>
