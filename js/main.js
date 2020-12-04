@@ -9,9 +9,11 @@ const app = new Vue({
     hasSearched: false, //ci dice se ha già fatto almeno una ricerca,
     currentPage: 1, // pagina principale, usata nell'endless scroll, incrementa ogni volta
     currentWhere: "", //costa stà cercando l'utente, usata per enlsess scroll
+    currentSearch: "/search/multi", //where the user is searching
     maxPage: 1, //numero massimo di pagine caricabili nell' endless
     orderBy: "popularity",
-    orderByMenu: false,
+    orderByMenu: false, //scroll menu of order-by
+    filterByMenu: false, //scroll menu of filter-by
   },
 
   computed: {
@@ -26,6 +28,21 @@ const app = new Vue({
           ? 1
           : 0;
       });
+    },
+
+    placeholder() {
+      switch (this.currentSearch) {
+        case "/search/multi":
+          return "Cerca in tutto il database";
+        case "/search/tv":
+          return "Cerca tra le serie tv";
+        case "/search/movie":
+          return "Cerca tra i film";
+        case "/search/person":
+          return "Cerca tra le persone";
+        default:
+          return "Cerca...";
+      }
     },
   },
 
@@ -75,7 +92,7 @@ const app = new Vue({
     },
 
     //funzione di ricerca sull API. Di default cerca su tutti i canali, la ricerca può essere ristretta dall'utente.
-    getQueryMovies(where = "/search/multi", page = 1) {
+    getQueryMovies(where, page = 1) {
       this.currentWhere = where;
       this.hasSearched = true;
       this.movies = [];

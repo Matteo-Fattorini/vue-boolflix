@@ -32,12 +32,22 @@
                  
               </ul>
             </div></span>
+            <span  @click ="filterByMenu = !filterByMenu" class="filterBy">Filtra per <i class="fas fa-sort-down arrow-down"></i>
+            <div @mouseleave="filterByMenu = false" v-if ="filterByMenu"class="filter-by-list">
+              <ul>
+                 <li @click ="currentSearch = '/search/tv'">Serie TV</li>
+                 <li @click ="currentSearch = '/search/movie'">Film</li>
+                 <li @click ="currentSearch = '/search/person'">Persone</li>
+                 <li @click ="currentSearch = '/search/multi'">Tutto</li>
+                 
+              </ul>
+            </div></span>
             <input
-              @input = "getQueryMovies()"
+              @input = "getQueryMovies(currentSearch)"
               @keydown.enter="getQueryMovies('/search/multi')"
               class="input-search"
               v-model="input"
-              placeholder="cerca un titolo"
+              :placeholder="placeholder"
               type="search"
             />
           </div>
@@ -52,22 +62,23 @@
         <div :key="movie.id" v-for="movie in sortMovie" class="movie">
           
           <img  class ="poster-img"
-            :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+            :src="'https://image.tmdb.org/t/p/w500/' + (movie.poster_path ? movie.poster_path : movie.profile_path)"
             @error="stockImage"
             alt="movie-poster"
           />
+          <div class = actor-detail v-if="!movie.overview" class="actor"></div>
 
-          <div class="details">
-          <div class="title">{{movie.title}}
+
+          <div v-if ="movie.overview" class="details">
+            <div class="title">{{movie.title ? movie.title : movie.name}}
             <div v-if="movie.title != movie.original_title" class="original-title"> Original title: {{movie.original_title}}</div>
-            <div class="year">{{movie.release_date}}</div>
+            <div class="year">{{movie.release_date ? movie.relase_date : movie.first_air_date}}</div>
           </div>
           <div class="description">{{movie.overview}}</div>
-          
           <div class="language">
-            <img class="flag-img" :src="flagSource(movie.original_language)" alt="logo">
+            <img  class="flag-img" :src="flagSource(movie.original_language)" alt="logo">
              {{movie.original_language}}</></div>
-          <div><i v-for ="n in 5" :class="{yellow:  n <= voteTransform(movie.vote_average) }" class="fas fa-star fa-2x grey"></i>
+          <div ><i v-for ="n in 5" :class="{yellow:  n <= voteTransform(movie.vote_average) }" class="fas fa-star fa-2x grey"></i>
           </div>
             
         </div>

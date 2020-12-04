@@ -51,7 +51,7 @@ header .input-search {
   border-radius: 10px;
 }
 
-header .search, .searchBy {
+header .search, .searchBy, .filterBy {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,16 +59,16 @@ header .search, .searchBy {
   color: white;
 }
 
-.searchBy {
+.searchBy, .filterBy {
   gap: 10px;
   position: relative;
 }
 
-.searchBy .arrow-down:hover {
+.searchBy .arrow-down:hover, .filterBy .arrow-down:hover {
   transform: scale(1.12)
 }
 
-.searchBy .order-by-list {
+.searchBy .order-by-list, .filterBy .filter-by-list {
   height: 100px;
   width: 150px;
   border: 1px solid white;
@@ -80,11 +80,14 @@ header .search, .searchBy {
   padding: 20px 30px;
   border-radius: 20px;
 }
+.filterBy .filter-by-list {
+  height: 130px;
+}
 
-.searchBy .order-by-list ul {
+.searchBy .order-by-list ul, .filterBy .filter-by-list ul {
   list-style-type: none;
 }
-.searchBy .order-by-list ul li:hover{
+.searchBy .order-by-list ul li:hover,.filterBy .filter-by-list ul li:hover {
   transform: scale(1.5);
   cursor: pointer;
 }
@@ -93,6 +96,7 @@ header .search, .searchBy {
 
 
 .movies-container {
+  min-width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,8 +163,8 @@ header .search, .searchBy {
 .movie .description {
   padding: 20px;
   color: white;
-  min-height: 50%;
-  max-height: 50%;
+  min-height: 30%;
+  max-height: 30%;
   max-width: 400px;
   line-height: 30px;
   overflow: auto;
