@@ -28,11 +28,11 @@
         
         <div class="header-container">
           <div><img src="css/img/logo.png" alt="logo" /></div>
-
-          <!-- inizio contenitore di cerca/ordina per/filtra per -->
+          <!-- hamburger nascosto -->
           <div class="mediaQuery">
             <div id ="hamburger-menu"> <i @click ="openHidden" id=openHidden class ="fas fa-bars fa-2x hamburger"></i> 
-             
+              
+          <!-- inizio contenitore di cerca/ordina per/filtra per -->
           <div class="search">
 
             <!-- inizio riquadro  ordina per -->
@@ -41,7 +41,7 @@
               <ul>
                  <li @mouseenter ="orderBy = 'vote_average'">Rating</li>
                  <li @mouseenter ="orderBy = 'popularity'">Popularity</li>
-                 <li @mouseenter ="orderBy = 'release_date'">Relase Date</li>
+                 <li @mouseenter ="orderBy = 'release_date'">Date</li>
                  
               </ul>
             </div></span>
@@ -59,7 +59,7 @@
             <!-- fine riquadro filtra per -->
 
             <!-- inizio riquadro input text -->
-            <input
+            <div class = input-container><input
               @input = "getQueryMovies(currentSearch)"
               @keydown.enter="getQueryMovies(currentSearch)"
               class="input-search"
@@ -67,6 +67,11 @@
               :placeholder="'Cerca in '+ placeholder"
               type="search"
             />
+            <button @click="activateSearch" class= "input-btn">
+               <i class = "fas fa-search fa-2x"> </i>
+            </button>
+          </div>
+            
           </div>
         </div>
       </header>

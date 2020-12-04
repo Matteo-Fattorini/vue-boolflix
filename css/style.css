@@ -44,12 +44,40 @@ header img {
 
 header .input-search {
   height: 40px;
-  width: 300px;
+  width: 10px;
   padding: 0 10px;
   vertical-align: middle;
   background-color: inherit;
   color: white;
-  border-radius: 10px;
+  font-size: 1.5rem;
+  border: 0;
+  transition: width 0.3s ease;
+  
+}
+
+
+.input-btn {
+  vertical-align: middle;
+  color: white;
+  background-color: inherit;
+  height: 40px;
+  border: 0;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s ease;
+  
+}
+.input-container {
+  position:relative
+}
+
+.input-container.isActive .input-search {
+  width: 300px;
+  /* border: 1px solid white; */
+}
+.input-container.isActive .input-btn {
+  transform: translateX(298px);
 }
 
 header .search,
@@ -64,6 +92,7 @@ header .search,
 
 .searchBy,
 .filterBy {
+  font-size: 1.5rem;
   gap: 10px;
   position: relative;
 }
@@ -75,9 +104,10 @@ header .search,
 
 .searchBy .order-by-list,
 .filterBy .filter-by-list {
-  height: 100px;
+  
+  height: 250px;
   width: 150px;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   position: absolute;
   left: 30%;
   top: 30px;
@@ -87,7 +117,7 @@ header .search,
   border-radius: 20px;
 }
 .filterBy .filter-by-list {
-  height: 130px;
+  /* height: 270px; */
 }
 
 .searchBy .order-by-list ul,
@@ -293,6 +323,8 @@ main.active .hidden-search {
     max-width: 200px;
     height: 400px;
   }
+
+  
 
   .movie img {
     object-fit: cover;

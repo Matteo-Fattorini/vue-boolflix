@@ -72,6 +72,14 @@ const app = new Vue({
       document.getElementById("main").classList.toggle("active");
     },
 
+    activateSearch() {
+      let container = document.querySelector(".input-container");
+      container.classList.toggle("isActive");
+      if (container.className.includes("isActive")) {
+        document.querySelector(".input-search").focus();
+      }
+    },
+
     // funzione che si occupa dell'endless scroll. Se arriva in fondo alla pagina, carica gli elementi della pagina successiva e li aggiunge a quelli già esistenti
     scroll() {
       window.onscroll = () => {
