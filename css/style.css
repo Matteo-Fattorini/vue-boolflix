@@ -6,7 +6,7 @@
 }
 
 body {
-  background: #1e2d3b;
+  background: #11171d;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -126,6 +126,7 @@ header .search,
 }
 
 .container {
+  background: #1e2d3b;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -135,7 +136,6 @@ header .search,
 .movie .poster-img {
   height: 100%;
   border-radius: 20px;
- 
 }
 
 .movie .flag-img {
@@ -207,4 +207,76 @@ header .search,
   text-transform: uppercase;
   font-size: 2.5rem;
   margin-left: 8%;
+}
+
+/* !HIDDEN  */
+
+.hamburger {
+  display: none;
+  color: white;
+}
+
+.hamburger:hover {
+  cursor: pointer;
+}
+
+#hamburger-menu {
+  transition: transform 0.3s ease-in;
+  position: relative;
+}
+
+#hamburger-menu .hidden-search {
+  border: 2px solid white;
+  border-radius: 20px;
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  right: 10%;
+}
+
+main {
+  transition: transform 0.3s linear;
+  position: relative;
+}
+
+main.active {
+  transform: rotate(-3deg);
+  transform-origin: bottom left;
+}
+
+main.active .hidden-search {
+  padding: 0 20px;
+  color: white;
+  position: absolute;
+  top: 130px;
+  right: -100px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(3deg);
+  transform-origin: bottom left;
+}
+
+.hidden-search i {
+  margin-bottom: 30px;
+}
+
+@media screen and (max-width: 1200px) {
+  .search {
+    display: none !important;
+  }
+  .hamburger {
+    display: unset;
+  }
+  .movie {
+    min-width: 300px;
+    max-width: 200px;
+    height: 400px;
+  }
+
+  .movie img {
+    object-fit: cover;
+  }
 }

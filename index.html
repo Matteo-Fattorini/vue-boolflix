@@ -18,12 +18,21 @@
   </head>
   <body>
     <main id="main">
+      <div class="hidden-search">
+        <i class ="fas fa-search fa-2x hamburger"></i>
+        <i class ="fas fa-sort-alpha-up fa-2x hamburger"></i>
+        <i class ="fas fa-filter fa-2x hamburger"></i>
+        <i @click="closeHidden" class ="fas fa-times fa-2x hamburger"></i>
+      </div>
       <header>
         
         <div class="header-container">
           <div><img src="css/img/logo.png" alt="logo" /></div>
 
           <!-- inizio contenitore di cerca/ordina per/filtra per -->
+          <div class="mediaQuery">
+            <div id ="hamburger-menu"> <i @click ="openHidden" id=openHidden class ="fas fa-bars fa-2x hamburger"></i> 
+             
           <div class="search">
 
             <!-- inizio riquadro  ordina per -->
