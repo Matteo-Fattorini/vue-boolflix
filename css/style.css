@@ -52,7 +52,9 @@ header .input-search {
   border-radius: 10px;
 }
 
-header .search, .searchBy, .filterBy {
+header .search,
+.searchBy,
+.filterBy {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,16 +62,19 @@ header .search, .searchBy, .filterBy {
   color: white;
 }
 
-.searchBy, .filterBy {
+.searchBy,
+.filterBy {
   gap: 10px;
   position: relative;
 }
 
-.searchBy .arrow-down:hover, .filterBy .arrow-down:hover {
-  transform: scale(1.12)
+.searchBy .arrow-down:hover,
+.filterBy .arrow-down:hover {
+  transform: scale(1.12);
 }
 
-.searchBy .order-by-list, .filterBy .filter-by-list {
+.searchBy .order-by-list,
+.filterBy .filter-by-list {
   height: 100px;
   width: 150px;
   border: 1px solid white;
@@ -85,16 +90,15 @@ header .search, .searchBy, .filterBy {
   height: 130px;
 }
 
-.searchBy .order-by-list ul, .filterBy .filter-by-list ul {
+.searchBy .order-by-list ul,
+.filterBy .filter-by-list ul {
   list-style-type: none;
 }
-.searchBy .order-by-list ul li:hover,.filterBy .filter-by-list ul li:hover {
+.searchBy .order-by-list ul li:hover,
+.filterBy .filter-by-list ul li:hover {
   transform: scale(1.5);
   cursor: pointer;
 }
-
-
-
 
 .movies-container {
   min-width: 100vw;
@@ -104,7 +108,6 @@ header .search, .searchBy, .filterBy {
   flex-wrap: wrap;
   padding: 100px 0;
   position: relative;
-
 }
 
 .movie {
@@ -127,12 +130,12 @@ header .search, .searchBy, .filterBy {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  
 }
 
 .movie .poster-img {
   height: 100%;
   border-radius: 20px;
+ 
 }
 
 .movie .flag-img {
@@ -171,7 +174,8 @@ header .search, .searchBy, .filterBy {
   overflow: auto;
 }
 
-.details, .actor-details {
+.details,
+.actor-details {
   display: none;
   width: 100%;
   height: 100%;
@@ -184,12 +188,11 @@ header .search, .searchBy, .filterBy {
   max-width: 50%;
 }
 
-
-
 .movie:hover .poster-img {
   display: none;
 }
-.movie:hover .details,.movie:hover .actor-details{
+.movie:hover .details,
+.movie:hover .actor-details {
   display: flex;
 }
 

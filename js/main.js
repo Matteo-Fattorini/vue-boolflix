@@ -1,6 +1,7 @@
 const app = new Vue({
   el: "#main",
   data: {
+    search,
     key: "375fb5d5a05f3c4fec8077369df2b91e", //chiave api
     input: "", //input v-model su cerca
     movies: [], //risultati del GET, visualizzati con v-for
@@ -33,13 +34,13 @@ const app = new Vue({
     placeholder() {
       switch (this.currentSearch) {
         case "/search/multi":
-          return "Cerca in tutto il database";
+          return "tutto il database";
         case "/search/tv":
-          return "Cerca tra le serie tv";
+          return "tutte le serie tv";
         case "/search/movie":
-          return "Cerca tra i film";
+          return "tutti i film";
         case "/search/person":
-          return "Cerca tra le persone";
+          return "tutte le persone";
         default:
           return "Cerca...";
       }

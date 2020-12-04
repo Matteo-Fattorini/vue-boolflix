@@ -22,7 +22,11 @@
         
         <div class="header-container">
           <div><img src="css/img/logo.png" alt="logo" /></div>
+
+          <!-- inizio contenitore di cerca/ordina per/filtra per -->
           <div class="search">
+
+            <!-- inizio riquadro  ordina per -->
             <span @click ="orderByMenu = !orderByMenu" class="searchBy">Ordina per <i class="fas fa-sort-down arrow-down"></i>
             <div @mouseleave="orderByMenu = false" v-if ="orderByMenu" class="order-by-list">
               <ul>
@@ -32,32 +36,42 @@
                  
               </ul>
             </div></span>
+            <!-- fine riquadro ordina per -->
+
+            <!-- inizio riquadro filtra per -->
             <span  @click ="filterByMenu = !filterByMenu" class="filterBy">Filtra per <i class="fas fa-sort-down arrow-down"></i>
             <div @mouseleave="filterByMenu = false" v-if ="filterByMenu"class="filter-by-list">
+
               <ul>
-                 <li @click ="currentSearch = '/search/tv'">Serie TV</li>
-                 <li @click ="currentSearch = '/search/movie'">Film</li>
-                 <li @click ="currentSearch = '/search/person'">Persone</li>
-                 <li @click ="currentSearch = '/search/multi'">Tutto</li>
-                 
+                 <li @click="currentSearch = item[1],getQueryMovies(currentSearch)" v-for="item in search">{{item[0]}}</li>
               </ul>
+
             </div></span>
+            <!-- fine riquadro filtra per -->
+
+            <!-- inizio riquadro input text -->
             <input
               @input = "getQueryMovies(currentSearch)"
-              @keydown.enter="getQueryMovies('/search/multi')"
+              @keydown.enter="getQueryMovies(currentSearch)"
               class="input-search"
               v-model="input"
-              :placeholder="placeholder"
+              :placeholder="'Cerca in '+ placeholder"
               type="search"
             />
           </div>
         </div>
       </header>
+
+      <!-- fine header -->
         
 
-
+      <!-- inizio contenuto -->
       <div class="container">
-      <div class="searched">{{searchTitle}}</div>
+      <!-- info su cosa sta cercando e dove -->
+      <div v-if ="hasSearched" class="searched">{{searchTitle}} in {{placeholder}}</div>
+      <div v-else class="searched">{{searchTitle}}</div>
+
+      <!-- inizio contenitore dei risultati  -->
       <div class="movies-container">
         <div :key="movie.id" v-for="movie in sortMovie" class="movie">
           
@@ -84,7 +98,7 @@
 
           <!-- fine sezione attore -->
 
-
+          <!-- Inizio sezione movies -->
           <div v-if ="!movie.gender" class="details">
             <div class="title">{{movie.title ? movie.title : movie.name}}
             <div v-if="movie.title != movie.original_title" class="original-title"> Original title: {{movie.original_title}}</div>
@@ -98,6 +112,7 @@
           </div>
             
         </div>
+        <!-- Fine sezione movies -->
         </div>
 
       </div>
