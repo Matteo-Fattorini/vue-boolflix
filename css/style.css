@@ -331,10 +331,41 @@ main.active .hidden-search {
   
 }
 
+.hidden-search input {
+  display:none
+}
+
+.hidden-search.active input {
+  border: 0;
+  padding: 0 10px;
+  color: white;
+  display: unset;
+  font-size: 1.5rem;
+  width: 250px;
+  height: 50px;
+  background-color: inherit;
+  vertical-align: middle;
+  font-style: italic;
+
+  
+}
+
+.hidden-search.active .fa-search {
+  position: relative;
+  transform:translateX(250px)
+}
+
+.hidden-search.active .fa-times {
+  position: relative;
+  transform:translateX(-430px);
+  vertical-align: middle;
+}
+
 
 .hidden-search i {
   margin-right: 30px;
   cursor: pointer;
+  vertical-align: middle;
 }
 
 .hamburger:hover{
@@ -354,6 +385,11 @@ main.active .hidden-search {
     min-width: 300px;
     max-width: 200px;
     height: 400px;
+  }
+
+  .searched {
+    font-size: 1.3rem;
+    align-self: center;
   }
 
   

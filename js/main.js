@@ -90,13 +90,27 @@ const app = new Vue({
       document.getElementById("main").classList.toggle("active");
     },
 
+    deactivate() { 
+     
+      document.getElementById("main").classList.remove("active");
+      document.querySelector(".hidden-search").classList.remove("active")
+    },
+    
+
     activateSearch() {
       let container = document.querySelector(".input-container");
+      let hidden = document.querySelector(".hidden-search");
       container.classList.toggle("active");
-      if (container.className.includes("active")) {
+      hidden.classList.toggle("active");
+      if (
+        container.className.includes("active") ||
+        hidden.className.includes("active")
+      ) {
         document.querySelector(".input-search").focus();
+        
       }
     },
+ 
 
     getGenres() {
       axios
