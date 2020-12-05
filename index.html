@@ -58,6 +58,18 @@
             </div></span>
             <!-- fine riquadro filtra per -->
 
+            <!-- inizio riquadro generi -->
+            <div  @click ="genresMenu = !genresMenu" class="filterBy filter-genres">
+            <div @click ="getQueryMovies(currentSearch)" >Genere <i class="fas fa-sort-down arrow-down"></i>  </div>
+            <div @mouseleave="genresMenu = false" v-if ="genresMenu"class="filter-by-list">
+              <ul>
+                <li  @click ="filterGenres(item.id)" v-for="item in genres">{{item.name}}</li>
+              </ul>
+              
+
+            </div></div>
+            <!-- fine riquadro generi -->
+
             <!-- inizio riquadro input text -->
             <div class = input-container><input
               @input = "getQueryMovies(currentSearch)"
@@ -122,6 +134,14 @@
           <div class="language">
             <img  class="flag-img" :src="flagSource(movie.original_language)" alt="logo">
              {{movie.original_language}}</></div>
+          <div class="genres">
+            <span>Genere:</span>
+            <ul class = genres-list>
+              <li v-for ="genre in movie.genre_ids">
+                {{nameGenre(genre)}}
+              </li>
+            </ul>
+                         </div>
           <div ><i v-for ="n in 5" :class="{yellow:  n <= voteTransform(movie.vote_average) }" class="fas fa-star fa-2x grey"></i>
           </div>
             

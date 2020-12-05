@@ -46,6 +46,7 @@ header .input-search {
   height: 40px;
   width: 10px;
   padding: 0 10px;
+  font-style: italic;
   vertical-align: middle;
   background-color: inherit;
   color: white;
@@ -72,11 +73,11 @@ header .input-search {
   position:relative
 }
 
-.input-container.isActive .input-search {
+.input-container.active .input-search {
   width: 300px;
   /* border: 1px solid white; */
 }
-.input-container.isActive .input-btn {
+.input-container.active .input-btn {
   transform: translateX(298px);
 }
 
@@ -102,6 +103,10 @@ header .search,
   transform: scale(1.12);
 }
 
+.arrow-down {
+  margin-left: 5px;
+}
+
 .searchBy .order-by-list,
 .filterBy .filter-by-list {
   
@@ -116,9 +121,7 @@ header .search,
   padding: 20px 30px;
   border-radius: 20px;
 }
-.filterBy .filter-by-list {
-  /* height: 270px; */
-}
+
 
 .searchBy .order-by-list ul,
 .filterBy .filter-by-list ul {
@@ -128,6 +131,20 @@ header .search,
 .filterBy .filter-by-list ul li:hover {
   transform: scale(1.5);
   cursor: pointer;
+}
+
+
+.filterBy.filter-genres ul{
+  padding-left: 70px;
+  height: 200px;
+  width: 300px;
+  display:flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-y:scroll;
+  transform: translateX(-20%);
+  
+  
 }
 
 .movies-container {
@@ -182,6 +199,21 @@ header .search,
 .movie .original-title {
   color: grey;
   font-size: 10px;
+}
+
+.movie .genres-list {
+  margin-top: 10px;
+  list-style-type: none;
+}
+
+.movie .genres {
+  color:white;
+  
+}
+.movie .genres span {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .movie .year {
