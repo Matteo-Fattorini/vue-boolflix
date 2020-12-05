@@ -26,7 +26,7 @@ A sample of what it can do
 
 
 
-![](netflix.gif)
+![](netflix3.gif)
 
 
 Special responsive design
