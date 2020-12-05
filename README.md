@@ -14,10 +14,11 @@ Functionalities
  - Movies can be searched in the database
  - Filter by movie/tv-shows/actors or all the database
  - Movies can be sorted by popularity/rating or date
+ - Movies can be filtered by genres
  - Endless scrolling
  - Hovering on movies will give further details as original name, language and rating
  - Hovering on actors will give more info on what movie are they known for
- - 
+ 
  
 
 A sample of what it can do
