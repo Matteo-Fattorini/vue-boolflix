@@ -375,10 +375,10 @@ main.active .hidden-search {
   
 }
 
-.hidden-search.active .order {
+.hidden-search.active .order, .hidden-search.active .filter {
   position: relative;
 }
-.hidden-search .order > ul {
+.hidden-search .order > ul, .hidden-search .filter > ul {
   position: absolute;
   top: 190px;
   font-size: 1rem;
@@ -386,28 +386,19 @@ main.active .hidden-search {
   gap: 20px;
   list-style-type:none;
 }
-.hidden-search .order > ul li:hover {
-  transform: scale(1.1) !important;
-}
-.hidden-search.active .filter {
-  position: relative;
-}
-.hidden-search .filter > ul {
-  position: absolute;
-  top: 190px;
-  font-size: 1rem;
-  display: flex;
-  gap: 20px;
-  list-style-type:none;
-}
-.hidden-search .filter > ul li:hover {
+.hidden-search .order > ul li:hover, .hidden-search .filter > ul li:hover {
   transform: scale(1.1) !important;
 }
 
+.hidden-search .filter > ul li{
+  margin-left: -10px;
+}
 
 
 
 
+
+/* QUERIES */
 
 
 @media screen and (max-width: 1300px) {
