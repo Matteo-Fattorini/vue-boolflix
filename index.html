@@ -18,8 +18,12 @@
   </head>
   <body>
     <main id="main">
+
+      <!-- Inizio responsive, hidden-menu -->
       <div class="hidden-search">
-        
+
+        <!-- icona della lente di ingrandimento -->
+        <!-- ?qui vengono chiamate: activateSearch()/getQueryMovies() -->
         <i @click = "activateSearch" class ="fas fa-search fa-2x hamburger"></i>
         <input
               @input = "getQueryMovies(currentSearch)"
@@ -29,28 +33,41 @@
               placeholder="Cerca..."
               type="search"
             />
+
+        <!-- al click del toggle, chiude tutti gli altri, compreso il search e apre la lista che corrisponde a se stesso -->
+
+        <!-- toggle "ordina-per" -->
+        <!-- ?qui vengono chiamate: deactivateSearch() -->
         <i @click = "orderByMenuHidden = !orderByMenuHidden, deactivateSearch(), filterByMenuHidden = false"
         
-         class  ="fas fa-sort-alpha-up fa-2x hamburger order">
+        class  ="fas fa-sort-alpha-up fa-2x hamburger order">
           <ul v-if ="orderByMenuHidden" class = "hidden-order">
             <li @click ="orderBy = 'vote_average'">Rating</li>
-                 <li @click ="orderBy = 'popularity'">Popularity</li>
-                 <li @click ="orderBy = 'release_date'">Date</li>
+                <li @click ="orderBy = 'popularity'">Popularity</li>
+                <li @click ="orderBy = 'release_date'">Date</li>
           </ul>
         </i>
+        <!-- toggle filterby -->
+        <!-- Il filtro non funziona se prima non si è fatto una ricerca. Di default mette la parola "eddie" se l'utente prova a fare un filtro senza aver messo input -->
+        <!-- ?qui vengono chiamate: deactivateSearch(), getQueryMovies() -->
         <i @click ="filterByMenuHidden = !filterByMenuHidden, orderByMenuHidden = false, input? input:input ='eddie', deactivateSearch() " class ="fas fa-filter fa-2x hamburger filter ">
           <ul class="hidden-filter" v-if="filterByMenuHidden">
-                 <li @click="currentSearch = item[1],getQueryMovies(currentSearch)" v-for="item in search">{{item[0]}}</li>
+                <li @click="currentSearch = item[1],getQueryMovies(currentSearch)" v-for="item in search">{{item[0]}}</li>
               </ul>
         </i>
+        <!-- la "x" chiude il menu a scomparsa -->
         <i @click="deactivate" class ="fas fa-times fa-2x hamburger"></i>
       </div>
+
+      <!-- fine responsive hidden menu -->
       <header>
+
         
         <div class="header-container">
           <div><img src="css/img/logo.png" alt="logo" /></div>
 
           <!-- hamburger nascosto -->
+          <!-- ?qui vengono chiamate: openHidden() -->
           <div class="mediaQuery">
             <div id ="hamburger-menu"> <i @click ="openHidden" id=openHidden class ="fas fa-bars fa-2x hamburger"></i> 
               
@@ -58,29 +75,34 @@
           <div class="search">
 
             <!-- inizio riquadro  ordina per -->
+            <!-- viene cambiato il valore della variabile orderBy che viene poi usato da computed sortMovie() per ritornare  la lista dei film in ordine-->
             <span @click ="orderByMenu = !orderByMenu" class="searchBy">Ordina per <i class="fas fa-sort-down arrow-down"></i>
             <div @mouseleave="orderByMenu = false" v-if ="orderByMenu" class="order-by-list">
               <ul>
-                 <li @mouseenter ="orderBy = 'vote_average'">Rating</li>
-                 <li @mouseenter ="orderBy = 'popularity'">Popularity</li>
-                 <li @mouseenter ="orderBy = 'release_date'">Date</li>
-                 
+                <li @mouseenter ="orderBy = 'vote_average'">Rating</li>
+                <li @mouseenter ="orderBy = 'popularity'">Popularity</li>
+                <li @mouseenter ="orderBy = 'release_date'">Date</li>
+              
               </ul>
             </div></span>
             <!-- fine riquadro ordina per -->
 
             <!-- inizio riquadro filtra per -->
+            <!-- !Il filtro non funziona se prima non si è fatto una ricerca. Di default mette la parola "eddie" se l'utente prova a fare un filtro senza aver messo input -->
+            <!-- ?in questa sezione viene chiamata la funzione currentSearch -->
             <span  @click ="filterByMenu = !filterByMenu, input? input:input ='eddie' "class="filterBy">Filtra per <i class="fas fa-sort-down arrow-down"></i>
             <div @mouseleave="filterByMenu = false" v-if ="filterByMenu"class="filter-by-list">
 
               <ul>
-                 <li @click="currentSearch = item[1],getQueryMovies(currentSearch)" v-for="item in search">{{item[0]}}</li>
+                <li @click="currentSearch = item[1],getQueryMovies(currentSearch)" v-for="item in search">{{item[0]}}</li>
               </ul>
 
             </div></span>
             <!-- fine riquadro filtra per -->
 
             <!-- inizio riquadro generi -->
+            <!-- ?qui vengono chiamate: getQueryMovies(), filterGenres() -->
+            <!-- al click del titolo "genere" viene fatta una nuova ricerca per refreshare la lista su cui riapplicare un eventuale filtro -->
             <div  @click ="genresMenu = !genresMenu" class="filterBy filter-genres">
             <div @click ="getQueryMovies(currentSearch)" >Genere <i class="fas fa-sort-down arrow-down"></i>  </div>
             <div @mouseleave="genresMenu = false" v-if ="genresMenu"class="filter-by-list">
@@ -89,10 +111,14 @@
               </ul>
               
 
-            </div></div>
+            </div>
+          </div>
             <!-- fine riquadro generi -->
 
             <!-- inizio riquadro input text -->
+            <!-- ?qui vengono chiamate: getQueryMovies() -->
+            <!-- effettua una ricerca sulla base del testo inserito dall utente.
+            Se non ci sono filtri, la ricerca viene effettuata su tutto il database -->
             <div class = input-container><input
               @input = "getQueryMovies(currentSearch)"
               @keydown.enter="getQueryMovies(currentSearch)"
@@ -102,7 +128,7 @@
               type="search"
             />
             <button @click="activateSearch" class= "input-btn">
-               <i class = "fas fa-search fa-2x"> </i>
+              <i class = "fas fa-search fa-2x"> </i>
             </button>
           </div>
             
@@ -120,6 +146,7 @@
       <div v-else class="searched">{{searchTitle}}</div>
 
       <!-- inizio contenitore dei risultati  -->
+      <!-- il v-for viene fatto sempre sulla lista filtrata, ordinata di default su "popularity" -->
       <div class="movies-container">
         <div :key="movie.id" v-for="movie in sortMovie" class="movie">
           
@@ -130,6 +157,7 @@
           />
 
           <!-- inizio sezione attore -->
+          <!-- questa sezione è valida solo se la scheda non è di un film, altrimenti non viene mai eseguita -->
           <div class = actor-details v-if="movie.gender">
             <div class="title">{{movie.title ? movie.title : movie.name}}
             </div>
@@ -140,7 +168,7 @@
             :src="'https://image.tmdb.org/t/p/w500/' + (movie.known_for[0].poster_path)" alt="image-poster"
             @error="stockImage">
             
-           <div class="description">{{movie.known_for[0] ? movie.known_for[0].overview : "non disponibile"}}</div>
+          <div class="description">{{movie.known_for[0] ? movie.known_for[0].overview : "non disponibile"}}</div>
           
           </div>
 
@@ -155,7 +183,7 @@
           <div class="description">{{movie.overview}}</div>
           <div class="language">
             <img  class="flag-img" :src="flagSource(movie.original_language)" alt="logo">
-             {{movie.original_language}}</></div>
+            {{movie.original_language}}</></div>
           <div class="genres">
             <span>Genere:</span>
             <ul class = genres-list>
@@ -163,7 +191,7 @@
                 {{nameGenre(genre)}}
               </li>
             </ul>
-                         </div>
+                      </div>
           <div ><i v-for ="n in 5" :class="{yellow:  n <= voteTransform(movie.vote_average) }" class="fas fa-star fa-2x grey"></i>
           </div>
             

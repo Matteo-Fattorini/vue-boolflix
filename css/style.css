@@ -57,7 +57,7 @@ header .input-search {
 }
 
 
-.input-btn {
+header .input-btn {
   vertical-align: middle;
   color: white;
   background-color: inherit;
@@ -69,15 +69,15 @@ header .input-search {
   transition: transform 0.3s ease;
   
 }
-.input-container {
+header .input-container {
   position:relative
 }
 
-.input-container.active .input-search {
+header .input-container.active .input-search {
   width: 300px;
-  /* border: 1px solid white; */
+
 }
-.input-container.active .input-btn {
+header .input-container.active .input-btn {
   transform: translateX(298px);
 }
 
@@ -91,24 +91,24 @@ header .search,
   color: white;
 }
 
-.searchBy,
-.filterBy {
+header .searchBy,
+header .filterBy {
   font-size: 1.5rem;
   gap: 10px;
   position: relative;
 }
 
-.searchBy .arrow-down:hover,
-.filterBy .arrow-down:hover {
+header .searchBy .arrow-down:hover,
+header .filterBy .arrow-down:hover {
   transform: scale(1.12);
 }
 
-.arrow-down {
+header .arrow-down {
   margin-left: 5px;
 }
 
-.searchBy .order-by-list,
-.filterBy .filter-by-list {
+header .searchBy .order-by-list,
+header .filterBy .filter-by-list {
   
   height: 250px;
   width: 150px;
@@ -123,18 +123,18 @@ header .search,
 }
 
 
-.searchBy .order-by-list ul,
-.filterBy .filter-by-list ul {
+header .searchBy .order-by-list ul,
+header .filterBy .filter-by-list ul {
   list-style-type: none;
 }
-.searchBy .order-by-list ul li:hover,
-.filterBy .filter-by-list ul li:hover {
+header .searchBy .order-by-list ul li:hover,
+header .filterBy .filter-by-list ul li:hover {
   transform: scale(1.5);
   cursor: pointer;
 }
 
 
-.filterBy.filter-genres ul{
+header .filterBy.filter-genres ul{
   padding-left: 70px;
   height: 200px;
   width: 300px;

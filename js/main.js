@@ -10,7 +10,7 @@ const app = new Vue({
     hasSearched: false, //ci dice se ha già fatto almeno una ricerca,
     currentPage: 1, // pagina principale, usata nell'endless scroll, incrementa ogni volta
     currentWhere: "", //cosa stà cercando l'utente, usata per enlsess scroll
-    currentSearch: "/search/multi", //where the user is searching
+    currentSearch: "/search/multi", //dove sta cercando l'utente
     maxPage: 1, //numero massimo di pagine caricabili nell' endless
     orderBy: "popularity",
     orderByMenu: false, //scroll menu of order-by
@@ -22,7 +22,7 @@ const app = new Vue({
   },
 
   computed: {
-    //return a sorted list of movies by popularity
+    //ritorna una nuova lista di film, ordinata per quello che ha scelto utente. Default = popularity
     sortMovie() {
       return this.movies.sort(function (a, b) {
         let value = app.orderBy;
@@ -35,6 +35,7 @@ const app = new Vue({
       });
     },
 
+    // gestisce cosa viene scritto nel placeholder del cerca e nel titolo principale
     placeholder() {
       switch (this.currentSearch) {
         case "/search/multi":
@@ -52,7 +53,7 @@ const app = new Vue({
   },
 
   methods: {
-    // converts the number of genre in a name to display
+    // converte il numero ID del genere nel nome da visualizzare
     nameGenre(genre) {
       for (elements of this.genres) {
         for (key in elements) {
@@ -62,7 +63,7 @@ const app = new Vue({
         }
       }
     },
-
+  //cambia l'elenco dei film sulla base del filtro scelto dall utente
     filterGenres(id) {
       this.movies = this.movies.filter((movie) => movie.genre_ids.includes(id));
     },
