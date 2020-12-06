@@ -36,6 +36,6 @@ Special responsive design
 
 
 
-![](netflix2.gif)
+![](netflix-responsive.gif)
 
 
