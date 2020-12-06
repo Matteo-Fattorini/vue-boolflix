@@ -19,6 +19,7 @@
   <body>
     <main id="main">
       <div class="hidden-search">
+        
         <i @click = "activateSearch" class ="fas fa-search fa-2x hamburger"></i>
         <input
               @input = "getQueryMovies(currentSearch)"
@@ -28,9 +29,21 @@
               placeholder="Cerca..."
               type="search"
             />
-        <i class ="fas fa-sort-alpha-up fa-2x hamburger"></i>
-        <i class ="fas fa-filter fa-2x hamburger"></i>
-        <i @click="closeHidden" class ="fas fa-times fa-2x hamburger"></i>
+        <i @click = "orderByMenuHidden = !orderByMenuHidden, deactivateSearch(), filterByMenuHidden = false"
+        
+         class  ="fas fa-sort-alpha-up fa-2x hamburger order">
+          <ul v-if ="orderByMenuHidden" class = "hidden-order">
+            <li @click ="orderBy = 'vote_average'">Rating</li>
+                 <li @click ="orderBy = 'popularity'">Popularity</li>
+                 <li @click ="orderBy = 'release_date'">Date</li>
+          </ul>
+        </i>
+        <i @click ="filterByMenuHidden = !filterByMenuHidden, orderByMenuHidden = false, input? input:input ='eddie', deactivateSearch() " class ="fas fa-filter fa-2x hamburger filter ">
+          <ul class="hidden-filter" v-if="filterByMenuHidden">
+                 <li @click="currentSearch = item[1],getQueryMovies(currentSearch)" v-for="item in search">{{item[0]}}</li>
+              </ul>
+        </i>
+        <i @click="deactivate" class ="fas fa-times fa-2x hamburger"></i>
       </div>
       <header>
         
@@ -57,7 +70,7 @@
             <!-- fine riquadro ordina per -->
 
             <!-- inizio riquadro filtra per -->
-            <span  @click ="filterByMenu = !filterByMenu" class="filterBy">Filtra per <i class="fas fa-sort-down arrow-down"></i>
+            <span  @click ="filterByMenu = !filterByMenu, input? input:input ='eddie' "class="filterBy">Filtra per <i class="fas fa-sort-down arrow-down"></i>
             <div @mouseleave="filterByMenu = false" v-if ="filterByMenu"class="filter-by-list">
 
               <ul>

@@ -368,13 +368,49 @@ main.active .hidden-search {
   vertical-align: middle;
 }
 
-.hamburger:hover{
-  opacity: 0.6
+.hidden-search .hidden-order {
+  position: relative;
+  bottom: 50px;
+  left: 100px;
+  
+}
+
+.hidden-search.active .order {
+  position: relative;
+}
+.hidden-search .order > ul {
+  position: absolute;
+  top: 190px;
+  font-size: 1rem;
+  display: flex;
+  gap: 20px;
+  list-style-type:none;
+}
+.hidden-search .order > ul li:hover {
+  transform: scale(1.1) !important;
+}
+.hidden-search.active .filter {
+  position: relative;
+}
+.hidden-search .filter > ul {
+  position: absolute;
+  top: 190px;
+  font-size: 1rem;
+  display: flex;
+  gap: 20px;
+  list-style-type:none;
+}
+.hidden-search .filter > ul li:hover {
+  transform: scale(1.1) !important;
 }
 
 
 
-@media screen and (max-width: 1200px) {
+
+
+
+
+@media screen and (max-width: 1300px) {
   .search {
     display: none !important;
   }
